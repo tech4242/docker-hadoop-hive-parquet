@@ -43,15 +43,28 @@ services:
     image: bde2020/hive-metastore-postgresql:2.3.0
     ports:
       - "5432:5432"
+  huedb:
+    image: postgres:12.1-alpine
+    volumes:
+      - pg_data:/var/lib/postgresl/data/
+    ports:
+      - "5432"
+    env_file:
+      - ./hadoop-hive.env
+    environment:
+        SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432 hive-metastore:9083"
   hue:
     image: gethue/hue:latest
     environment:
-        SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432 hive-metastore:9083"
+        SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432 hive-metastore:9083 huedb:5000"
     ports:
       - "8888:8888"
     volumes:
       - ./hue-overrides.ini:/usr/share/hue/desktop/conf/hue-overrides.ini
+    links:
+      - huedb
 
 volumes:
   namenode:
   datanode:
+  pg_data:
