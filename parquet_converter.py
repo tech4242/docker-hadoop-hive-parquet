@@ -5,7 +5,7 @@ import pandas as pd
 you need to install pandas and pyarrow with pip before you run this script 
 """
 def main():
-    df = pd.read_csv("data/players_20.csv") 
-    df.to_parquet(fname="data/players_20.parquet", engine="pyarrow", compression=None)
+    df = pd.read_csv("data/201801_Punctuality_Statistics_Full_Analysis.csv") 
+    df.to_parquet(fname="data/201801_Punctuality_Statistics_Full_Analysis.parquet", engine="pyarrow", compression=None)
 
 main()
