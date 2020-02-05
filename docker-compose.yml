@@ -67,7 +67,7 @@ services:
         SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432 resourcemanager:8088 hive-metastore:9083"
   
   hue:
-    image: gethue/hue:20200122-135001
+    image: gethue/hue:4.6.0
     environment:
         SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432 resourcemanager:8088 hive-metastore:9083 huedb:5000"
     ports:
